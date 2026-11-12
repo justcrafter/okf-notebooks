@@ -1,0 +1,72 @@
+# Example okf-notebooks configuration with ALL options.
+# Values shown are the defaults, except the required `root` and entries marked "example".
+# The config is strict: an unknown key stops the server from starting.
+# Pass the file with `--config` or the OKF_NOTEBOOKS_CONFIG environment variable.
+
+# Data directory (a single git repository). REQUIRED.
+root: ./data
+
+server:
+  transport: streamable-http      # streamable-http | stdio
+  host: 127.0.0.1                 # default is 0.0.0.0 (all interfaces)
+  port: 8765                      # 1..65535
+  path: /mcp
+  # Allowed values of the Host header (empty = loopback only). An entry without a port matches any port.
+  # An IPv4 subnet may be given as a prefix (192.168.88 = /24) or CIDR (10.0.0.0/8).
+  allowed_hosts:                  # example
+    - 127.0.0.1:8765
+    - localhost:8765
+    - notebooks.tailnet.ts.net
+    - 192.168.88
+  # Allowed values of the Origin header; others are rejected.
+  allowed_origins: []
+  max_body_bytes: 262144          # request body limit, bytes
+  rate_limit_per_token: 120/min   # N/sec | N/min | N/hour
+
+auth:
+  tokens_file: .auth/tokens.json  # token store (SHA-256 hashes), inside root
+
+limits:
+  max_notebooks: 30
+  max_concept_bytes: 65536
+  max_search_results: 50
+
+notebook_creation:
+  default: proposal               # off | proposal (a human approves the request) | direct
+  slug_pattern: "^[a-z][a-z0-9-]{1,38}[a-z0-9]$"
+  reserved_slugs: [admin, tmp, archive, proposed]
+
+git:
+  enabled: true
+  commit_per_write: true          # one commit per write
+  # A PRIVATE notebooks repository for background push (not the public code repository).
+  # Credentials in the URL are rejected: use OKF_NOTEBOOKS_GIT_TOKEN (HTTPS) or
+  # OKF_NOTEBOOKS_GIT_SSH_KEY (path to a deploy key).
+  remote: git@github.com:example/my-private-notebooks.git   # example; default is null
+  # Extra URLs that `remote` must not equal.
+  public_code_repos: []
+
+index:
+  path: .index/fts.sqlite         # full-text index
+
+# Note comments (threads between the human and agents). NOT a cache: the database is not rebuilt,
+# include it in your backups. The database directory excludes itself from git.
+comments:
+  path: .comments/threads.sqlite
+
+# Directory with your own presets (*.yaml). Default is null.
+presets_dir: ./presets            # example
+
+# Permissions of token actors: claude-code, opencode, external-harness.
+# allow: read | write | notebook_creation | comments (verify/archive: human only, via the CLI).
+# Default: read + write + comments; external-harness reads and comments by default.
+# If `allow` is set explicitly without `comments`, the comment tools are unavailable to that actor
+# and it cannot be mentioned with @.
+actors:                           # example
+  claude-code:
+    allow: [read, write, notebook_creation, comments]
+    notebook_creation: proposal   # off | proposal | direct (overrides notebook_creation.default)
+  opencode:
+    allow: [read, write]          # no comments: opencode gets no comment tools
+  external-harness:
+    allow: [read]

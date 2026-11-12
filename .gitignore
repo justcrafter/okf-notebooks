@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+data/
+config/
+web/node_modules/
+src/okf_notebooks/webui_dist/
+.DS_Store

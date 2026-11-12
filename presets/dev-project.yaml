@@ -1,0 +1,94 @@
+# Preset for running a software project and its development: domain glossary and ADRs, specs and
+# tickets, research, prototypes, bug diagnosis and retrospectives.
+# Enable with `presets_dir` in config.yaml; see docs/dev-project-preset.md.
+name: dev-project
+description: >-
+  Suited for one software project and its development: keeps the domain glossary, decisions (ADR),
+  specs, tickets, research, prototypes, diagnosed bugs, retrospectives and playbooks. Pick it for a
+  notebook about a codebase or product; not for personal or non-engineering notes.
+types:
+  - name: Project
+    description: >-
+      What the project is: purpose, users, repositories, architecture in a few paragraphs, current
+      focus and how to run and test it. One note per project or service; keep it short and link out.
+    dir: projects
+    fields: [description, tags, sources, stale_after, repo]
+    stale_after: 180d
+
+  - name: Term
+    description: >-
+      One glossary entry of the project's domain language (GLOSSARY.md style): a one-sentence
+      definition of what the term IS, no implementation details. Put the words to avoid in `avoid`.
+      Relationships between terms go in the body or `links`.
+    dir: terms
+    fields: [description, tags, sources, stale_after, avoid]
+
+  - name: Decision
+    description: >-
+      An architecture decision record (ADR). Write only when the decision is hard to reverse,
+      surprising without context, and the result of a real trade-off. Body: context, decision,
+      alternatives considered and why they lost, consequences. Link the notes it supersedes.
+    dir: decisions
+    fields: [description, tags, sources, stale_after, decided, supersedes]
+    required: [decided]
+
+  - name: Spec
+    description: >-
+      A spec or PRD for one feature: problem statement, solution from the user's view, numbered user
+      stories, implementation and testing decisions, out of scope. Written in glossary vocabulary.
+    dir: specs
+    fields: [description, tags, sources, stale_after, issue]
+    stale_after: 365d
+
+  - name: Ticket
+    description: >-
+      A unit of work (tracer-bullet slice or bug report) with its brief: what to build, acceptance
+      criteria, direct blockers. `category` is bug or enhancement; `triage` is one of needs-triage,
+      needs-info, ready-for-agent, ready-for-human, wontfix; `blocked_by` lists ticket ids.
+    dir: tickets
+    fields: [description, tags, sources, stale_after, category, triage, blocked_by, spec]
+    required: [category, triage]
+    stale_after: 90d
+
+  - name: Research
+    description: >-
+      Findings on a question, gathered from primary sources (official docs, source code, specs).
+      Every material claim cites its source in `sources`; separate observed facts, inferences and
+      recommendations; record versions, dates and open questions that could change the answer.
+    dir: research
+    fields: [description, tags, sources, stale_after, question]
+    required: [question]
+    stale_after: 180d
+
+  - name: Prototype
+    description: >-
+      The record of a throwaway prototype built to answer one design question: the question, what was
+      built, what was learned, and the verdict. The prototype code itself is not kept here.
+    dir: prototypes
+    fields: [description, tags, sources, stale_after, question, verdict]
+    required: [question]
+    stale_after: 90d
+
+  - name: Bug
+    description: >-
+      A diagnosed bug or regression: symptom, reproduction (the feedback loop used), root cause, the
+      hypotheses ruled out, the fix and the regression test. Write it after the cause is confirmed.
+    dir: bugs
+    fields: [description, tags, sources, stale_after, symptom, root_cause, severity]
+    required: [symptom]
+
+  - name: Retro
+    description: >-
+      A retrospective on a coding session or period, aimed at the agent's environment: navigation,
+      missing or wrong context, repeated mistakes, and concrete proposed changes to docs, skills or
+      tooling. Record what was changed afterwards, not only what was proposed.
+    dir: retros
+    fields: [description, tags, sources, stale_after, period]
+
+  - name: Playbook
+    description: >-
+      A repeatable procedure for the project: release, deploy, local setup, incident response, how to
+      run the checks. Numbered steps, expected result of each, and what to do when a step fails.
+    dir: playbooks
+    fields: [description, tags, sources, stale_after]
+    stale_after: 180d

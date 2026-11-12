@@ -1,0 +1,12 @@
+.venv
+.git
+tests
+dist
+__pycache__
+*.pyc
+.pytest_cache
+.ruff_cache
+data
+config
+web/node_modules
+src/okf_notebooks/webui_dist
