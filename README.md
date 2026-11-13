@@ -62,9 +62,6 @@ Requirements: Docker with Compose, or Python 3.11+ with [uv](https://docs.astral
 
 ### With Docker
 
-> The image `ghcr.io/justcrafter/okf-notebooks:0.1.0` is not published yet. Until it is, build it yourself:
-> `docker build -t okf-notebooks:0.1.0 .` and start Compose with `OKF_NOTEBOOKS_IMAGE=okf-notebooks:0.1.0`.
-
 ```bash
 git clone https://github.com/justcrafter/okf-notebooks.git
 cd okf-notebooks

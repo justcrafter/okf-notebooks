@@ -64,9 +64,6 @@ git-репозиторием. Человек читает и проверяет 
 
 ### Через Docker
 
-> Образ `ghcr.io/justcrafter/okf-notebooks:0.1.0` ещё не опубликован. Пока его нет, соберите образ сами:
-> `docker build -t okf-notebooks:0.1.0 .` и запускайте Compose с `OKF_NOTEBOOKS_IMAGE=okf-notebooks:0.1.0`.
-
 ```bash
 git clone https://github.com/justcrafter/okf-notebooks.git
 cd okf-notebooks
