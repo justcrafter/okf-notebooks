@@ -721,3 +721,15 @@ async def test_comments_need_the_right_and_reject_unknown_mentions(mem):
     async with m.connect("claude-code") as c:
         assert_error(await c.call_tool("comment_reply", {"thread_id": t["id"], "body": "cc @opencode"}), "invalid")
         assert_error(await c.call_tool("comment_reply", {"thread_id": 999, "body": "x"}), "not_found")
+
+
+@pytest.mark.anyio
+async def test_comment_text_is_in_content(mem):
+    m = mem()
+    t = _human_thread(m, body="rewrite this step")
+    async with m.connect() as c:
+        listed = await c.call_tool("comments_list", {})
+        assert "rewrite this step" in listed.content[0].text
+        reply = await c.call_tool("comment_reply", {"thread_id": t["id"], "body": "on it"})
+        text = reply.content[0].text
+        assert "rewrite this step" in text and "on it" in text
