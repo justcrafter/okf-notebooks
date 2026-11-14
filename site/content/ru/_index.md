@@ -1,11 +1,12 @@
 ---
 title: "okf-notebooks"
-description: "MCP-сервер, который даёт ИИ-агентам общую долговременную память в виде Markdown-блокнотов под git, а доверие к записям определяет человек."
+seo_title: "okf-notebooks: долговременная память для ИИ-агентов, MCP-сервер"
+description: "Self-hosted MCP-сервер, который даёт Claude Code, Claude Desktop и opencode общую долговременную память: Markdown-блокноты в формате OKF под git с проверкой человеком."
 
 hero:
   eyebrow: "MCP-сервер · self-hosted · MIT"
   title: "Память агентов, которую можно **прочитать, сравнить и проверить**"
-  lead: "okf-notebooks даёт Claude Code, Claude Desktop, opencode и другим MCP-клиентам общую долговременную память в виде **блокнотов**: обычных каталогов Markdown-файлов в формате [OKF](https://okf.md/) под одним git-репозиторием. Человек читает и проверяет написанное агентами во встроенном веб-интерфейсе."
+  lead: "okf-notebooks — MCP-сервер, который даёт Claude Code, Claude Desktop, opencode и другим MCP-клиентам общую долговременную память в виде **блокнотов**: обычных каталогов Markdown-файлов в формате [OKF](https://okf.md/) под одним git-репозиторием. Человек читает и проверяет написанное агентами во встроенном веб-интерфейсе."
   meta: "Один ASGI-процесс (Streamable HTTP), без внешней БД: поиск идёт по SQLite FTS5."
   cta_install: "Начать"
   cta_github: "Открыть на GitHub"

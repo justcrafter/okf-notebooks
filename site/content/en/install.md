@@ -1,6 +1,7 @@
 ---
 title: "Install"
-description: "Run the server with Docker or from source, connect an agent, configure it."
+seo_title: "Install okf-notebooks: an MCP memory server for Claude Code and other agents"
+description: "Install the okf-notebooks MCP server with Docker or from source, connect Claude Code, Claude Desktop or opencode, and configure it."
 ---
 
 ## Install and quick start

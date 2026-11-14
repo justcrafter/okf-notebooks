@@ -1,5 +1,6 @@
 ---
 title: "Scenarios"
+seo_title: "Use cases: memory for AI agents with okf-notebooks"
 description: "Typical ways to use okf-notebooks, each with the steps to set it up and links to the reference pages."
 ---
 

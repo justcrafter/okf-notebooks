@@ -1,11 +1,12 @@
 ---
 title: "okf-notebooks"
-description: "An MCP server that gives AI agents shared, durable memory as plain Markdown notebooks under git, with a human deciding what is trusted."
+seo_title: "okf-notebooks: persistent memory for AI agents, an MCP server"
+description: "Self-hosted MCP server that gives Claude Code, Claude Desktop and opencode persistent, shared memory: Markdown notebooks in the OKF format under git, verified by a human."
 
 hero:
   eyebrow: "MCP server · self-hosted · MIT"
   title: "Memory for your agents that you can **read, diff and verify**"
-  lead: "okf-notebooks gives Claude Code, Claude Desktop, opencode and other MCP clients shared, durable memory in the form of **notebooks**: plain directories of Markdown files in the [OKF](https://okf.md/) format under one git repository. A human reads and verifies what the agents wrote in a built-in web UI."
+  lead: "okf-notebooks is an MCP server that gives Claude Code, Claude Desktop, opencode and other MCP clients shared, persistent memory in the form of **notebooks**: plain directories of Markdown files in the [OKF](https://okf.md/) format under one git repository. A human reads and verifies what the agents wrote in a built-in web UI."
   meta: "One ASGI process, Streamable HTTP, no external database: search runs on SQLite FTS5."
   cta_install: "Get started"
   cta_github: "View on GitHub"

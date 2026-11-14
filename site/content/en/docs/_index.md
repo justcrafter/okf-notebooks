@@ -1,5 +1,7 @@
 ---
 title: "Documentation"
+seo_title: "okf-notebooks documentation: notebook format, presets, agents, review"
+description: "Reference for okf-notebooks: the OKF notebook format, type presets, several agents, notebook lifecycle, verification, network access, Review UI and git backup."
 ---
 
 Reference pages by topic. Installation, quick start and the config reference are on the [Install](/install.md) page;

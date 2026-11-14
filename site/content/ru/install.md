@@ -1,6 +1,7 @@
 ---
 title: "Установка"
-description: "Запуск сервера через Docker или из исходников, подключение агента, конфигурация."
+seo_title: "Установка okf-notebooks: MCP-сервер памяти для Claude Code и других агентов"
+description: "Установка MCP-сервера okf-notebooks через Docker или из исходников, подключение Claude Code, Claude Desktop или opencode, конфигурация."
 ---
 
 ## Установка и быстрый старт
