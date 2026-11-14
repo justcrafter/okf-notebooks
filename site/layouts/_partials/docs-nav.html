@@ -1,0 +1,15 @@
+{{- $current := . }}
+{{- with site.GetPage "/docs" }}
+<nav class="docs-nav" aria-label="{{ i18n "docs_nav" }}">
+  <details open>
+    <summary>{{ i18n "docs_nav" }}</summary>
+    <ul>
+      <li><a href="{{ .RelPermalink }}"{{ if eq $current.RelPermalink .RelPermalink }} aria-current="page"{{ end }}>{{ .Title }}</a></li>
+      {{- range .Pages.ByWeight }}
+      <li><a href="{{ .RelPermalink }}"{{ if eq $current.RelPermalink .RelPermalink }} aria-current="page"{{ end }}>{{ .Title }}</a></li>
+      {{- end }}
+    </ul>
+  </details>
+  <script>if (matchMedia("(max-width: 899px)").matches) document.currentScript.previousElementSibling.open = false;</script>
+</nav>
+{{- end }}

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="{{ site.Language.Locale }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {{- $title := or .Params.seo_title (cond .IsHome site.Title (printf "%s · %s" .Title site.Title)) }}
+  {{- $desc := or .Description site.Params.description }}
+  {{- $image := "images/ui-note.png" | absURL }}
+  <title>{{ $title }}</title>
+  <meta name="description" content="{{ $desc }}">
+  <meta name="color-scheme" content="light dark">
+  <link rel="canonical" href="{{ .Permalink }}">
+  {{- range .AllTranslations }}
+  <link rel="alternate" hreflang="{{ .Language.Locale }}" href="{{ .Permalink }}">
+  {{- if eq .Language.Lang hugo.Sites.Default.Language.Lang }}
+  <link rel="alternate" hreflang="x-default" href="{{ .Permalink }}">
+  {{- end }}
+  {{- end }}
+  <meta property="og:site_name" content="{{ site.Title }}">
+  <meta property="og:locale" content="{{ site.Params.og_locale }}">
+  <meta property="og:title" content="{{ $title }}">
+  <meta property="og:description" content="{{ $desc }}">
+  <meta property="og:type" content="{{ cond .IsHome "website" "article" }}">
+  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:image" content="{{ $image }}">
+  <meta property="og:image:alt" content="{{ site.Title }} Review UI">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ $title }}">
+  <meta name="twitter:description" content="{{ $desc }}">
+  <meta name="twitter:image" content="{{ $image }}">
+  {{- if .IsHome }}
+  {{- $ld := dict
+      "@context" "https://schema.org"
+      "@graph" (slice
+        (dict
+          "@type" "SoftwareApplication"
+          "name" site.Title
+          "description" $desc
+          "url" .Permalink
+          "image" $image
+          "applicationCategory" "DeveloperApplication"
+          "operatingSystem" "Linux, macOS, Windows (Docker)"
+          "license" "https://opensource.org/licenses/MIT"
+          "isAccessibleForFree" true
+          "offers" (dict "@type" "Offer" "price" "0" "priceCurrency" "USD")
+          "sameAs" (slice site.Params.repo)
+          "keywords" "MCP server, Model Context Protocol, AI agent memory, Claude Code, OKF, Markdown, git"
+          "inLanguage" site.Language.Locale)
+        (dict
+          "@type" "WebSite"
+          "name" site.Title
+          "url" .Permalink
+          "inLanguage" site.Language.Locale))
+  }}
+  <script type="application/ld+json">{{ $ld | jsonify | safeJS }}</script>
+  {{- end }}
+  <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
+  {{- $css := slice (resources.Get "css/main.css") (resources.Get "css/syntax.css") | resources.Concat "css/site.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+</head>
+<body class="{{ if .IsHome }}is-home{{ end }}">
+  <a class="skip" href="#main">{{ i18n "skip" }}</a>
+  {{ partial "header.html" . }}
+  <main id="main">
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ partial "footer.html" . }}
+</body>
+</html>

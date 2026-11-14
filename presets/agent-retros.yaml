@@ -1,0 +1,47 @@
+# Preset for retrospectives of work with AI agents across projects: one note per session, patterns
+# confirmed in several sessions, and the concrete changes to the agents' environment they lead to.
+# Enable with `presets_dir` in config.yaml; see https://okf-notebooks.kazakov.dev/docs/agent-retros-preset/.
+name: agent-retros
+description: >-
+  Suited for retrospectives of work with AI agents (Claude Code, Codex, opencode and others) across
+  projects: session reviews, recurring patterns confirmed in two or more sessions, and concrete
+  improvements to the agents' environment (skills, CLAUDE.md, MCP tools, hooks, prompts). Not for
+  the task's own content or project decisions: those belong in the project's notebook.
+types:
+  - name: Session
+    description: >-
+      A retrospective of one session with an agent: the task, the outcome, what worked, the problems
+      and the user's corrections, what to do differently, links to patterns. `outcome` is one of
+      success, partial, failed, abandoned; `surface` is where the agent ran (CLI, IDE, desktop, web).
+    dir: sessions
+    fields: [description, tags, sources, stale_after, date, surface, model, project, task, outcome, user_corrections, patterns]
+    required: [date, outcome]
+
+  - name: Pattern
+    description: >-
+      A recurring behaviour of the agent or its environment seen in two or more sessions: an
+      anti-pattern or a good practice (`kind`: anti-pattern, practice), with its signs, cause and
+      links to the sessions.
+      `state` is one of observed, confirmed, addressed, gone; `improvements` links the changes made.
+    dir: patterns
+    fields: [description, tags, sources, stale_after, kind, category, occurrences, first_seen, last_seen, state, sessions, improvements]
+    required: [kind, sessions]
+    stale_after: 180d
+
+  - name: Improvement
+    description: >-
+      A concrete change to the agent's environment derived from a pattern: what changes and where
+      (`target`: skill, claude-md, preferences, mcp-tool, hook, check; `target_path`), its `state`
+      (proposed, applied, verified, reverted) and the effect observed in later sessions.
+    dir: improvements
+    fields: [description, tags, sources, stale_after, target, target_path, state, pattern, proposed, applied, effect]
+    required: [target, state, pattern]
+    stale_after: 90d
+
+  - name: Playbook
+    description: >-
+      A procedure for keeping the retros: how an agent writes a session review, how sessions are
+      rolled up into patterns, the category vocabulary. `applies_to` names the type it governs.
+    dir: playbooks
+    fields: [description, tags, sources, stale_after, applies_to]
+    stale_after: 180d

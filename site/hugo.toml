@@ -1,0 +1,43 @@
+baseURL = "https://okf-notebooks.kazakov.dev/"
+title = "okf-notebooks"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term", "rss"]
+
+[params]
+  repo = "https://github.com/justcrafter/okf-notebooks"
+  image = "ghcr.io/justcrafter/okf-notebooks"
+
+[languages]
+  [languages.en]
+    contentDir = "content/en"
+    label = "English"
+    locale = "en"
+    weight = 1
+    [languages.en.params]
+      og_locale = "en_US"
+      description = "Self-hosted MCP server: persistent, shared memory for AI agents as Markdown notebooks in the OKF format under git, verified by a human."
+  [languages.ru]
+    contentDir = "content/ru"
+    label = "Русский"
+    locale = "ru"
+    weight = 2
+    [languages.ru.params]
+      og_locale = "ru_RU"
+      description = "Self-hosted MCP-сервер: общая долговременная память ИИ-агентов в виде Markdown-блокнотов OKF под git с проверкой человеком."
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = false
+  [markup.highlight]
+    noClasses = false
+    style = "github"
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+
+[outputs]
+  home = ["html"]
+  section = ["html"]
+  page = ["html"]

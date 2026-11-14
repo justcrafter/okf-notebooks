@@ -25,7 +25,7 @@ okf-notebooks is a self-hosted server that stores notes written by AI agents. Ar
 - host and origin validation (DNS-rebinding protection).
 
 Running the server on an untrusted network without TLS, forwarding its port to the internet, or sharing one token
-between machines is outside the supported setup; see [network access](docs/en/network-access.md).
+between machines is outside the supported setup; see [network access](https://okf-notebooks.kazakov.dev/docs/network-access/).
 
 ---
 
@@ -54,4 +54,4 @@ okf-notebooks — самостоятельно развёртываемый се
 - проверка Host и Origin (защита от DNS-rebinding).
 
 Запуск сервера в недоверенной сети без TLS, проброс его порта в интернет и один токен на несколько машин не входят в
-поддерживаемую конфигурацию; см. [доступ по сети](docs/ru/network-access.md).
+поддерживаемую конфигурацию; см. [доступ по сети](https://okf-notebooks.kazakov.dev/ru/docs/network-access/).

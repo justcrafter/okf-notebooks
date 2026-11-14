@@ -1,0 +1,100 @@
+{{ define "main" }}
+{{- $p := .Params }}
+{{- $install := site.GetPage "/install" }}
+{{- $scenarios := site.GetPage "/scenarios" }}
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div class="hero-text">
+      <p class="eyebrow">{{ $p.hero.eyebrow }}</p>
+      <h1>{{ $p.hero.title | markdownify }}</h1>
+      <p class="hero-lead">{{ $p.hero.lead | markdownify }}</p>
+      <div class="cta">
+        <a class="btn btn-primary" href="{{ $install.RelPermalink }}">{{ $p.hero.cta_install }}</a>
+        <a class="btn" href="{{ site.Params.repo }}">{{ $p.hero.cta_github }}</a>
+      </div>
+      <p class="hero-meta">{{ $p.hero.meta | markdownify }}</p>
+    </div>
+    <figure class="hero-shot">
+      <img src="{{ "images/ui-note.png" | relURL }}" alt="{{ $p.hero.image_alt }}" width="1600" height="1000" loading="eager">
+    </figure>
+  </div>
+</section>
+
+<section class="band" id="idea">
+  <div class="wrap">
+    <h2>{{ $p.idea.title }}</h2>
+    <p class="section-lead">{{ $p.idea.lead | markdownify }}</p>
+    <div class="cards">
+      {{- range $p.idea.items }}
+      <div class="card">
+        <h3>{{ .title }}</h3>
+        <p>{{ .text | markdownify }}</p>
+      </div>
+      {{- end }}
+    </div>
+  </div>
+</section>
+
+<section class="band band-alt" id="how">
+  <div class="wrap">
+    <h2>{{ $p.how.title }}</h2>
+    <ol class="flow">
+      {{- range $p.how.steps }}
+      <li><strong>{{ .title }}</strong><span>{{ .text | markdownify }}</span></li>
+      {{- end }}
+    </ol>
+    <div class="not">
+      <h3>{{ $p.not.title }}</h3>
+      <p>{{ $p.not.text | markdownify }}</p>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="screens">
+  <div class="wrap">
+    <h2>{{ $p.screens.title }}</h2>
+    <p class="section-lead">{{ $p.screens.lead | markdownify }}</p>
+    <div class="shots">
+      {{- range $p.screens.items }}
+      <figure>
+        <a href="{{ .src | relURL }}"><img src="{{ .src | relURL }}" alt="{{ .alt }}" loading="lazy"></a>
+        <figcaption>{{ .alt }}</figcaption>
+      </figure>
+      {{- end }}
+    </div>
+  </div>
+</section>
+
+<section class="band band-alt" id="quickstart">
+  <div class="wrap">
+    <h2>{{ $p.quickstart.title }}</h2>
+    <p class="section-lead">{{ $p.quickstart.lead | markdownify }}</p>
+    <ol class="steps">
+      {{- range $p.quickstart.steps }}
+      <li>
+        <h3>{{ .title }}</h3>
+        {{- with .text }}<p>{{ . | markdownify }}</p>{{ end }}
+        {{ transform.Highlight .code (or .lang "bash") }}
+      </li>
+      {{- end }}
+    </ol>
+    <p><a class="more" href="{{ $install.RelPermalink }}">{{ $p.quickstart.more }} →</a></p>
+  </div>
+</section>
+
+<section class="band" id="scenarios">
+  <div class="wrap">
+    <h2>{{ $p.scenarios.title }}</h2>
+    <div class="cards cards-links">
+      {{- range $p.scenarios.items }}
+      <a class="card" href="{{ $scenarios.RelPermalink }}#{{ .anchor }}">
+        <h3>{{ .title }}</h3>
+        <p>{{ .text | markdownify }}</p>
+      </a>
+      {{- end }}
+    </div>
+    <p><a class="more" href="{{ $scenarios.RelPermalink }}">{{ $p.scenarios.more }} →</a></p>
+  </div>
+</section>
+{{ end }}

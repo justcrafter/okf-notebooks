@@ -1,0 +1,8 @@
+{{- /* Link to this page in the other language; fall back to the other language's home. */ -}}
+{{- range .Translations }}
+<a class="lang" href="{{ .RelPermalink }}" hreflang="{{ .Language.Locale }}" lang="{{ .Language.Locale }}">{{ upper .Language.Lang }}</a>
+{{- else }}
+  {{- range site.Home.Translations }}
+<a class="lang" href="{{ .RelPermalink }}" hreflang="{{ .Language.Locale }}" lang="{{ .Language.Locale }}">{{ upper .Language.Lang }}</a>
+  {{- end }}
+{{- end }}

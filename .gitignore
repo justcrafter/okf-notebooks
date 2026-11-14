@@ -10,3 +10,8 @@ config/
 web/node_modules/
 src/okf_notebooks/webui_dist/
 .DS_Store
+
+# Hugo site
+site/public/
+site/resources/
+site/.hugo_build.lock
