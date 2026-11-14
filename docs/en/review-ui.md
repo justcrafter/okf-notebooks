@@ -20,7 +20,8 @@ In Docker Compose the variable is passed through from the host environment: `OKF
 
 ## Screen layout
 
-Three areas:
+Three areas (on screens 1600 px and wider they take 20% | 60% | 20% of the width: the tree is pinned to the left edge,
+the right panel to the right, and the note is centred in a reading column up to 760 px):
 
 - **Left**: a notebook switcher (requests carry a badge), a title filter and a tree: types with counters, and inside a
   type its notes alphabetically. Clicking a type opens the type page and expands its notes; the arrow only collapses

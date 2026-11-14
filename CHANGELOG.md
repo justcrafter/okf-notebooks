@@ -6,6 +6,15 @@ and the project uses [Semantic Versioning](https://semver.org/).
 Все заметные изменения описываются здесь. Формат — [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/),
 версии — [SemVer](https://semver.org/lang/ru/).
 
+## [Unreleased]
+
+### Changed / Изменено
+
+- Wide screens (from 1600 px): 20% | 60% | 20% layout. The notebook tree hugs the left edge, the right panel the right
+  edge, the note is centred in a reading column up to 760 px; narrower windows keep the compact layout. / Широкие
+  экраны (от 1600 px): раскладка 20% | 60% | 20%. Дерево блокнота прижато к левому краю, правая панель — к правому,
+  заметка по центру в колонке чтения до 760 px; на более узких окнах прежняя компактная раскладка.
+
 ## [0.2.0] - 2026-11-14
 
 Review UI redesign; no changes to MCP, storage or configuration. / Редизайн веб-интерфейса ревью; MCP, хранилище и
