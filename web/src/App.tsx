@@ -10,6 +10,15 @@ import { NotesPage } from "./TypePage";
 import { Tree } from "./Tree";
 import { useAsync } from "./useAsync";
 
+function Select({ children, ...props }: React.SelectHTMLAttributes<HTMLSelectElement>) {
+  return (
+    <div className="sel">
+      <select {...props}>{children}</select>
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M4 6l4 4 4-4" /></svg>
+    </div>
+  );
+}
+
 function Login({ onDone }: { onDone: () => void }) {
   const t = useT();
   const [pw, setPw] = useState("");
@@ -57,7 +66,7 @@ function Shell({ onSignOut, lang, setLang }: { onSignOut: () => void; lang: Lang
     <div className={`app${menu ? " menu-open" : ""}`}>
       <aside className="side">
         <div className="side-head">
-          <select
+          <Select
             aria-label={t.switchNotebook}
             value={current ?? ""}
             onChange={(e) => {
@@ -70,7 +79,7 @@ function Shell({ onSignOut, lang, setLang }: { onSignOut: () => void; lang: Lang
                 {n.name}{n.status === "proposed" ? ` · ${t.proposedBadge}` : ""}
               </option>
             ))}
-          </select>
+          </Select>
         </div>
         {current && <Tree route={route} />}
         {current && (
@@ -84,10 +93,10 @@ function Shell({ onSignOut, lang, setLang }: { onSignOut: () => void; lang: Lang
           <button className="icon-btn burger" aria-label={t.openMenu} onClick={() => setMenu((m) => !m)}>☰</button>
           <a href="#/" className="brand">{t.appTitle}</a>
           <span className="spacer" />
-          <select aria-label={t.lang} value={lang} onChange={(e) => setLang(e.target.value as Lang)}>
+          <Select aria-label={t.lang} value={lang} onChange={(e) => setLang(e.target.value as Lang)}>
             <option value="ru">RU</option>
             <option value="en">EN</option>
-          </select>
+          </Select>
           <ThemeToggle />
           <button onClick={onSignOut}>{t.signOut}</button>
         </header>

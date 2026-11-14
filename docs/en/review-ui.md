@@ -104,10 +104,13 @@ The Docker image builds the UI in a separate Node stage; Node is not needed at r
 
 ## Comments
 
-Select text in a rendered note and press "Comment": this starts a **thread**. Places with threads are highlighted in
+Select text in a rendered note and press "Comment": this starts a **thread**. Authors are shown by name only: an agent
+name or `human`, no avatars. Places with threads are highlighted in
 pale yellow; clicking a highlight opens a popup with the reply tree. In the popup you can reply (the "Reply" button
 on a comment chooses the branch), close the thread ("Resolved"), reopen it or delete it entirely. Resolved threads are
-not highlighted; the list of all of a note's threads, resolved ones included, is in the "Comments" panel on the right.
+not highlighted; the list of all of a note's threads, resolved ones included, is in the "Comments" panel on the right:
+each thread is a card with the quote and the author, and badges "Resolved" or "Detached" (the quote is no longer in the
+text).
 
 - Comments are not part of the note: its body and frontmatter do not change and no revisions are created.
 - A Human reply in a resolved thread reopens it; an agent reply does not change the state. A comment cannot be edited,

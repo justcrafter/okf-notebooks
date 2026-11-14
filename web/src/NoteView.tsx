@@ -54,7 +54,7 @@ function RefList({ items, notebook }: { items: Ref[]; notebook: string }) {
   const t = useT();
   if (!items.length) return <p className="muted">{t.none}</p>;
   return (
-    <ul className="plain">
+    <ul className="plain refs">
       {items.map((r) =>
         r.broken ? (
           <li key={r.id} className="broken" title={t.broken}>

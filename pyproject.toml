@@ -1,6 +1,6 @@
 [project]
 name = "okf-notebooks"
-version = "0.1.0"
+version = "0.2.0"
 description = "Shared agent notebooks MCP server over OKF Markdown bundles"
 readme = "README.md"
 license = "MIT"

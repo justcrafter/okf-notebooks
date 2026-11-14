@@ -3,6 +3,11 @@ import { api, type CommentItem, type Thread, type ThreadList } from "./api";
 import { buildIndex, completeMention, describeSelection, findQuote, mentionQuery, type Selected } from "./anchor";
 import { useT } from "./i18n";
 
+// Authors are the Human or an Agent name; Agents have no avatars, only the name.
+function Author({ name }: { name: string }) {
+  return <span className="cm-author">{name}</span>;
+}
+
 type Anchors = Map<number, Range | null>;
 interface Point {
   x: number;
@@ -60,12 +65,14 @@ function Tree({ items, parent, onReply, replyTo }: { items: CommentItem[]; paren
     <ul className="cm-tree">
       {kids.map((c) => (
         <li key={c.id}>
-          <div className="cm-meta">
-            <span className="cm-author">{c.author}</span> · {new Date(c.created_at).toLocaleString(t.locale)}
-          </div>
-          <p className="cm-text">{c.body}</p>
-          <div className="cm-actions">
-            <button className={replyTo === c.id ? "active" : ""} onClick={() => onReply(c)}>{t.reply}</button>
+          <div className="cm-body">
+            <div className="cm-meta">
+              <Author name={c.author} /> · {new Date(c.created_at).toLocaleString(t.locale)}
+            </div>
+            <p className="cm-text">{c.body}</p>
+            <div className="cm-actions">
+              <button className={replyTo === c.id ? "active" : ""} onClick={() => onReply(c)}>{t.reply}</button>
+            </div>
           </div>
           <Tree items={items} parent={c.id} onReply={onReply} replyTo={replyTo} />
         </li>
@@ -149,7 +156,7 @@ function ThreadView({ thread, mentionable, changed }: { thread: Thread; mentiona
           setParent(null);
         }}
       />
-      <div className="cm-actions">
+      <div className="cm-foot">
         <button onClick={() => void flip()}>{resolved ? t.reopenThread : t.resolveThread}</button>
         <button className="danger" onClick={() => void remove()}>{t.deleteThread}</button>
       </div>
@@ -178,7 +185,9 @@ function Popover({ at, title, children, onClose }: { at: Point; title: string; c
     <div ref={ref} className="cm-pop" role="dialog" aria-label={title} style={{ left, top }}>
       <div className="cm-pop-head">
         <strong>{title}</strong>
-        <button className="cm-link" aria-label={t.close} onClick={onClose}>✕</button>
+        <button className="icon-btn" aria-label={t.close} onClick={onClose}>
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" aria-hidden="true"><path d="M4 4l8 8M12 4l-8 8" /></svg>
+        </button>
       </div>
       {children}
     </div>
@@ -239,6 +248,7 @@ export function CommentedArticle({ innerRef, kit, notebook, id, children }: { in
           onMouseDown={(e) => e.preventDefault()}
           onClick={() => setOpen({ kind: "new", sel, at: { x: sel.rect.left, y: sel.rect.bottom } })}
         >
+          <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M2.5 3.5h11v7h-6l-3 2.5v-2.5h-2z" /></svg>
           {t.addComment}
         </button>
       )}
@@ -294,11 +304,11 @@ export function CommentsPanel({ kit }: { kit: CommentsApi }) {
           {list.map((th) => (
             <li key={th.id}>
               <button className={`cm-item ${th.state}`} onClick={() => view(th)}>
-                <span>{th.quote.length > 80 ? th.quote.slice(0, 80) + "…" : th.quote}</span>
+                <span className="cm-quote">{th.quote.length > 80 ? th.quote.slice(0, 80) + "…" : th.quote}</span>
                 <span className="cm-meta">
-                  {th.comments[0]?.author} · {th.comments.length}
-                  {th.state === "resolved" && ` · ${t.resolvedBadge}`}
-                  {anchors.size > 0 && anchors.get(th.id) === null && ` · ${t.detached}`}
+                  <Author name={th.comments[0]?.author ?? "?"} /> · {th.comments.length}
+                  {th.state === "resolved" && <span className="badge ok-badge stable">{t.resolvedBadge}</span>}
+                  {th.state !== "resolved" && anchors.size > 0 && anchors.get(th.id) === null && <span className="badge stale">{t.detached}</span>}
                 </span>
               </button>
             </li>

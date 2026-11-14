@@ -6,6 +6,27 @@ and the project uses [Semantic Versioning](https://semver.org/).
 Все заметные изменения описываются здесь. Формат — [Keep a Changelog](https://keepachangelog.com/ru/1.1.0/),
 версии — [SemVer](https://semver.org/lang/ru/).
 
+## [0.2.0] - 2026-11-14
+
+Review UI redesign; no changes to MCP, storage or configuration. / Редизайн веб-интерфейса ревью; MCP, хранилище и
+конфигурация не менялись.
+
+### Changed / Изменено
+
+- Dropdowns (notebook and language switchers) draw their own arrow at a fixed distance from the edge; the native arrow
+  no longer shifts or overlaps the text. / Выпадающие списки (блокнот и язык) рисуют свою стрелку на фиксированном
+  расстоянии от края; нативная стрелка больше не съезжает и не наезжает на текст.
+- Right panel of a note: a consistent spacing rhythm, sections separated by lines, counters in headers, links and
+  citations as roomy rows, a full-width trust control. The column is 320 px wide. / Правая панель заметки: единый ритм
+  отступов, секции разделены линиями, счётчики в заголовках, ссылки и цитирования — просторные строки, статус доверия
+  на всю ширину. Ширина колонки — 320 px.
+- Comments: a "Comment" button with an icon, a roomier popup, quote and reply tree with a guide line, text-link
+  "Reply", a footer with "Resolve" and "Delete", cards with "Resolved" and "Detached" badges in the side list. Authors
+  are shown by name only (an agent name or `human`), without avatars. / Комментарии: кнопка «Комментировать» с иконкой,
+  просторное окно, цитата и дерево ответов с направляющей, «Ответить» как текстовая ссылка, нижняя панель
+  «Решено»/«Удалить», карточки с бейджами «Решён» и «Потерян» в списке справа. Авторы показываются только именем
+  (имя агента или `human`), без аватарок.
+
 ## [0.1.0] - 2026-11-12
 
 First public release. / Первый публичный релиз.
