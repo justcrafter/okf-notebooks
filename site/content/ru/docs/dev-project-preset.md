@@ -62,3 +62,6 @@ uv run okf-notebooks notebook create my-project \
 
 Скопируйте `presets/dev-project.yaml`, переименуйте и поправьте типы: правила, лимит в 12 типов и формат
 описаны в [presets.md](/docs/presets.md).
+
+Этот пресет — один из примеров формата, а не обязательная схема. Если ваша задача другая, придумайте свои типы или
+[попросите агента их предложить](/docs/presets.md#ask-an-agent).

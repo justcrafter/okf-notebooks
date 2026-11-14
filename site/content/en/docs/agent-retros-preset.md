@@ -61,3 +61,6 @@ Values the types expect:
 
 Copy `presets/agent-retros.yaml`, rename it and adjust the types. The rules, the 12-type limit and the format are in
 [presets.md](/docs/presets.md).
+
+This preset is one example of a format, not a requirement. If your case is different, design your own types or
+[ask an agent to propose them](/docs/presets.md#ask-an-agent).

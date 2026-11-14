@@ -61,3 +61,6 @@ uv run okf-notebooks notebook create agent-retros \
 
 Скопируйте `presets/agent-retros.yaml`, переименуйте и поправьте типы: правила, лимит в 12 типов и формат описаны в
 [presets.md](/docs/presets.md).
+
+Этот пресет — один из примеров формата, а не обязательная схема. Если ваша задача другая, придумайте свои типы или
+[попросите агента их предложить](/docs/presets.md#ask-an-agent).

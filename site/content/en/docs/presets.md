@@ -7,9 +7,10 @@ weight: 20
 A preset is a YAML file with a set of types. When a notebook is created it picks a preset (`--preset`) and gets its types.
 There is one built-in preset, `core` (`Project`, `Decision`, `Playbook`, `Term`). It cannot be overridden.
 
-The repository ships ready-made presets in `presets/`: [dev-project](/docs/dev-project-preset.md),
-[personal-finance](/docs/personal-finance-preset.md) and [agent-retros](/docs/agent-retros-preset.md). Use them as
-they are or as a starting point for your own.
+The repository ships three presets in `presets/`: [dev-project](/docs/dev-project-preset.md),
+[personal-finance](/docs/personal-finance-preset.md) and [agent-retros](/docs/agent-retros-preset.md).
+**They are examples, not a standard.** The format of your knowledge base is yours: take a preset as it is, change it,
+write your own from scratch, or [ask an agent to design one](#ask-an-agent) for your case.
 
 ## 1. Create a directory and point the config at it
 
@@ -72,6 +73,20 @@ with `preset: "ops"` (under the `proposal` policy the request goes to the approv
 [the lifecycle](/docs/notebook-lifecycle.md)).
 
 The description is 40–300 characters, `scope` is required: the agent chooses a notebook by it.
+
+## Ask an agent to design the format {#ask-an-agent}
+
+You don't have to write the types yourself. Tell the agent what you want to keep and how you will use it, and ask it
+to propose the format, for example:
+
+> I want a notebook for my reading: books, notes on chapters, quotes and ideas I want to come back to. Propose the
+> note types with their fields and required fields, show them to me, then file the notebook request.
+
+The agent looks at the existing presets with `presets_list`, then calls `notebook_create` with its own `types` (up to
+12) and a `rationale`. Under the default `proposal` policy the request waits for you: `okf-notebooks notebook pending` lists it,
+the proposed types are in `_proposed/<slug>/.okf/notebook.yaml`, and you approve or reject it ([lifecycle](/docs/notebook-lifecycle.md)). Later the agent
+can ask for one more type with `notebook_type_define`. If the format works out and you want it for other notebooks,
+save it as a preset file.
 
 ## Types without a preset
 

@@ -80,7 +80,8 @@ Read more: [Adopting an existing bundle](/docs/adopt-existing.md).
 - [agent-retros](/docs/agent-retros-preset.md): one notebook of retrospectives across projects. Session reviews
   roll up into patterns, patterns into concrete changes to skills, `CLAUDE.md` and tools, and the effect is checked.
 
-Both are YAML files in `presets/`: enable `presets_dir` and create the notebook with `--preset`.
+Both are YAML files in `presets/`: enable `presets_dir` and create the notebook with `--preset`. They are examples:
+for anything else, design your own types or [ask an agent to propose them](/docs/presets.md#ask-an-agent).
 
 ## Across machines, with backup {#network-and-backup}
 
