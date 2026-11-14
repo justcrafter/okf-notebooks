@@ -454,7 +454,7 @@ def build(config: Config, store: Store, lifecycle: Lifecycle, password: str, dis
     def static(path: str) -> Response:
         root = dist.resolve()
         if not (root / "index.html").is_file():
-            return Response("Review UI is not built (see docs/review-ui.md)", status_code=404, media_type="text/plain")
+            return Response("Review UI is not built (cd web && npm ci && npm run build)", status_code=404, media_type="text/plain")
         target = (root / path.lstrip("/")).resolve()
         if path not in ("", "/") and target.is_file() and root in target.parents:
             cache = "public, max-age=31536000, immutable" if "/assets/" in "/" + path else "no-cache"

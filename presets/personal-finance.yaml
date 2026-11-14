@@ -1,0 +1,109 @@
+# Preset for personal or family finances kept with an agent acting as a financial assistant: accounts,
+# debts, income, budget, goals, investments, period reports, decisions and market assumptions.
+# Enable with `presets_dir` in config.yaml; see https://okf-notebooks.kazakov.dev/docs/personal-finance-preset/.
+name: personal-finance
+description: >-
+  Suited for personal or family finances: accounts and assets, debts, income, budget categories,
+  financial goals, investment holdings and policy, monthly/quarterly/yearly reports, decisions and
+  the market assumptions behind them. Pick it for one household's money; not for business
+  accounting, single transactions or non-financial goals.
+types:
+  - name: Account
+    description: >-
+      Where money or an asset is kept: card, deposit, savings or brokerage account, cash, real estate,
+      a car. `kind` says which; record balance with `balance_date`, rate, liquidity and purpose. Never
+      store account or card numbers.
+    dir: accounts
+    fields: [description, tags, sources, stale_after, kind, institution, currency, balance, balance_date, rate, liquidity, purpose]
+    required: [kind, currency]
+    stale_after: 90d
+
+  - name: Liability
+    description: >-
+      A debt: mortgage, car loan, credit card, informal loan. Terms, rate, monthly payment, balance
+      with `balance_date`, scheduled payoff date and early repayment terms.
+    dir: liabilities
+    fields: [description, tags, sources, stale_after, kind, principal, balance, balance_date, rate, monthly_payment, payoff_date, prepayment_terms]
+    required: [kind]
+    stale_after: 90d
+
+  - name: IncomeSource
+    description: >-
+      A source of income: salary, freelance, rent, dividends, interest. `nature` is active or passive;
+      `stability` says how predictable it is.
+    dir: income-sources
+    fields: [description, tags, sources, stale_after, kind, nature, amount_monthly, currency, stability]
+    required: [nature]
+    stale_after: 180d
+
+  - name: BudgetCategory
+    description: >-
+      A spending category with its monthly limit. `kind` is one of essential, variable, wants,
+      goal-contribution. Actual spending goes into a Report, not here.
+    dir: budget
+    fields: [description, tags, sources, stale_after, kind, monthly_limit]
+    required: [kind]
+    stale_after: 365d
+
+  - name: FinGoal
+    description: >-
+      A financial goal: target amount, deadline, current amount, monthly contribution and priority.
+      `state` is one of planned, active, reached, dropped; `serves` links the life goal or value it
+      serves when that lives in another notebook.
+    dir: goals
+    fields: [description, tags, sources, stale_after, target_amount, current_amount, deadline, monthly_contribution, priority, state, serves]
+    required: [target_amount, deadline]
+    stale_after: 90d
+
+  - name: Holding
+    description: >-
+      An investment position: instrument, account, cost basis, current value with `value_date`, its
+      role in the portfolio, the thesis for holding it and the exit condition.
+    dir: holdings
+    fields: [description, tags, sources, stale_after, instrument, kind, account, cost_basis, current_value, value_date, role, thesis, exit_condition]
+    required: [thesis]
+    stale_after: 90d
+
+  - name: Policy
+    description: >-
+      The investment policy statement: target allocation, risk limits, rebalancing rule, preconditions
+      for investing (for example an emergency fund first) and horizon. Usually one note.
+    dir: policies
+    fields: [description, tags, sources, stale_after, target_allocation, risk_limits, rebalancing_rule, preconditions, horizon]
+    stale_after: 365d
+
+  - name: Report
+    description: >-
+      Results of a period (month, quarter, year) from category totals, never single transactions:
+      income, expenses by category, savings rate, net worth, emergency fund in months, passive income
+      share, debt paid, goal progress and drift from the stated goals. Put the data export in `sources`.
+    dir: reports
+    fields: [description, tags, sources, stale_after, period, period_kind, income, expenses, savings_rate, net_worth, cushion_months, passive_income_share, debt_paid, goal_progress, drift]
+    required: [period, period_kind]
+
+  - name: Decision
+    description: >-
+      A financial decision or recommendation: the question, options with their numbers, the choice
+      and why. Keep what the agent proposed apart from what the owner accepted: `proposed_by` names the
+      author, `state` is one of open, proposed, accepted, rejected, superseded; `review_on` is the
+      date to revisit it.
+    dir: decisions
+    fields: [description, tags, sources, stale_after, question, options, chosen, state, proposed_by, decided, review_on, goals]
+    required: [question, state]
+
+  - name: Assumption
+    description: >-
+      A market input used in calculations: deposit and loan rates, the central bank rate, inflation,
+      exchange rates. Always with `as_of` and a source in `sources`; ages quickly.
+    dir: assumptions
+    fields: [description, tags, sources, stale_after, value, as_of]
+    required: [value, as_of]
+    stale_after: 30d
+
+  - name: AdvisorRule
+    description: >-
+      How the agent works as a financial assistant in this notebook: role and limits, tone, the checks
+      it must run before a recommendation, how data is entered, red lines. `applies_to` names the
+      types or tasks a rule covers.
+    dir: advisor-rules
+    fields: [description, tags, sources, stale_after, applies_to]

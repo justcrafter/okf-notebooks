@@ -1,0 +1,41 @@
+baseURL = "https://okf-notebooks.kazakov.dev/"
+title = "okf-notebooks"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = false
+enableRobotsTXT = true
+disableKinds = ["taxonomy", "term", "rss"]
+
+[params]
+  repo = "https://github.com/justcrafter/okf-notebooks"
+  image = "ghcr.io/justcrafter/okf-notebooks"
+
+[languages]
+  [languages.en]
+    contentDir = "content/en"
+    label = "English"
+    locale = "en"
+    weight = 1
+    [languages.en.params]
+      description = "Shared, durable memory for AI agents as plain Markdown notebooks under git, with a human in the loop."
+  [languages.ru]
+    contentDir = "content/ru"
+    label = "Русский"
+    locale = "ru"
+    weight = 2
+    [languages.ru.params]
+      description = "Общая долговременная память ИИ-агентов в виде Markdown-блокнотов под git, с проверкой человеком."
+
+[markup]
+  [markup.goldmark.renderer]
+    unsafe = false
+  [markup.highlight]
+    noClasses = false
+    style = "github"
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+
+[outputs]
+  home = ["html"]
+  section = ["html"]
+  page = ["html"]

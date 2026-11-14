@@ -1,0 +1,23 @@
+{{- $home := site.Home }}
+{{- $section := .Section }}
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="{{ $home.RelPermalink }}">
+      <img src="{{ "favicon.svg" | relURL }}" alt="" width="24" height="24">
+      <span>okf-notebooks</span>
+    </a>
+    <nav class="nav" aria-label="Main">
+      {{- with site.GetPage "/install" }}
+      <a href="{{ .RelPermalink }}"{{ if eq $.RelPermalink .RelPermalink }} aria-current="page"{{ end }}>{{ i18n "nav_install" }}</a>
+      {{- end }}
+      {{- with site.GetPage "/scenarios" }}
+      <a href="{{ .RelPermalink }}"{{ if eq $.RelPermalink .RelPermalink }} aria-current="page"{{ end }}>{{ i18n "nav_scenarios" }}</a>
+      {{- end }}
+      {{- with site.GetPage "/docs" }}
+      <a href="{{ .RelPermalink }}"{{ if eq $section "docs" }} aria-current="page"{{ end }}>{{ i18n "nav_docs" }}</a>
+      {{- end }}
+      <a href="{{ site.Params.repo }}" class="nav-gh">{{ i18n "on_github" }}</a>
+      {{- partial "lang-switch.html" . }}
+    </nav>
+  </div>
+</header>

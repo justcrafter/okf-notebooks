@@ -1,0 +1,21 @@
+{{- /*
+  Links in content point at Markdown sources ("/docs/presets.md#anchor", "/install.md").
+  Resolve them to pages of the current language; fail the build on a broken one.
+*/ -}}
+{{- $dest := .Destination }}
+{{- $u := urls.Parse $dest }}
+{{- $external := false }}
+{{- if $u.IsAbs }}
+  {{- $external = true }}
+{{- else if strings.HasSuffix $u.Path ".md" }}
+  {{- $path := strings.TrimSuffix ".md" $u.Path }}
+  {{- $path = strings.TrimSuffix "/_index" $path }}
+  {{- with .PageInner.GetPage $path }}
+    {{- $dest = .RelPermalink }}
+    {{- with $u.Fragment }}{{ $dest = printf "%s#%s" $dest . }}{{ end }}
+  {{- else }}
+    {{- errorf "%s: broken link %q" $.PageInner.File.Path $.Destination }}
+  {{- end }}
+{{- end -}}
+<a href="{{ $dest | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}{{ if $external }} rel="noopener"{{ end }}>{{ .Text }}</a>
+{{- /* trim */ -}}

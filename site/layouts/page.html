@@ -1,0 +1,19 @@
+{{ define "main" }}
+{{- $isDoc := eq .Section "docs" }}
+<div class="wrap doc-layout{{ if not $isDoc }} no-sidebar{{ end }}">
+  {{- if $isDoc }}{{ partial "docs-nav.html" . }}{{ end }}
+  <article class="prose">
+    <h1>{{ .Title }}</h1>
+    {{- with .Description }}<p class="lead">{{ . }}</p>{{ end }}
+    {{ .Content }}
+  </article>
+  {{- if ge (len .Fragments.Headings) 1 }}
+  {{- with .TableOfContents }}
+  <aside class="toc" aria-label="{{ i18n "toc" }}">
+    <div class="toc-title">{{ i18n "toc" }}</div>
+    {{ . }}
+  </aside>
+  {{- end }}
+  {{- end }}
+</div>
+{{ end }}

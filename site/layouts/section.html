@@ -1,0 +1,9 @@
+{{ define "main" }}
+<div class="wrap doc-layout">
+  {{ partial "docs-nav.html" . }}
+  <article class="prose">
+    <h1>{{ .Title }}</h1>
+    {{ .Content }}
+  </article>
+</div>
+{{ end }}

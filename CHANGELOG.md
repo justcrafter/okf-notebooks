@@ -8,7 +8,20 @@ and the project uses [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 
+### Added / Добавлено
+
+- Project site at <https://okf-notebooks.kazakov.dev/> (`site/`, Hugo, EN/RU): landing page, install guide, scenarios
+  and documentation; its own nginx image `ghcr.io/justcrafter/okf-notebooks-site`. / Сайт проекта (`site/`, Hugo,
+  EN/RU): лендинг, установка, сценарии и документация; свой образ на nginx.
+- Presets `personal-finance` (accounts, debts, budget, goals, investments, reports, decisions) and `agent-retros`
+  (agent sessions, patterns, environment improvements) in `presets/`, with documentation pages. / Пресеты
+  `personal-finance` и `agent-retros` в `presets/` со страницами документации.
+
 ### Changed / Изменено
+
+- Documentation moved from `docs/` to `site/content/`; the READMEs keep the idea and a quick start and link to the
+  site. Release notes moved to `releases/`. / Документация переехала из `docs/` в `site/content/`; в README остались
+  идея и быстрый старт со ссылками на сайт. Release notes — в `releases/`.
 
 - Wide screens (from 1600 px): 20% | 60% | 20% layout. The notebook tree hugs the left edge, the right panel the right
   edge, the note is centred in a reading column up to 760 px; narrower windows keep the compact layout. / Широкие
