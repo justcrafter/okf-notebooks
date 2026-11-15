@@ -57,6 +57,9 @@
   <link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml">
   {{- $css := slice (resources.Get "css/main.css") (resources.Get "css/syntax.css") | resources.Concat "css/site.css" | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{- with site.Params.umami }}{{ if and hugo.IsProduction .website_id }}
+  <script defer src="{{ .src }}" data-website-id="{{ .website_id }}" data-domains="{{ .domains }}" data-do-not-track="true"></script>
+  {{- end }}{{ end }}
 </head>
 <body class="{{ if .IsHome }}is-home{{ end }}">
   <a class="skip" href="#main">{{ i18n "skip" }}</a>

@@ -9,6 +9,12 @@ disableKinds = ["taxonomy", "term", "rss"]
   repo = "https://github.com/justcrafter/okf-notebooks"
   image = "ghcr.io/justcrafter/okf-notebooks"
 
+  # Cookieless analytics; only rendered in production builds (not `hugo server`).
+  [params.umami]
+    src = "https://cloud.umami.is/script.js"
+    website_id = "366fe115-a7e7-4cfb-bbfd-478cd95a0376"
+    domains = "okf-notebooks.kazakov.dev"
+
 [languages]
   [languages.en]
     contentDir = "content/en"
