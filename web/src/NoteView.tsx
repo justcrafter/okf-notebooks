@@ -12,6 +12,27 @@ import { useAsync } from "./useAsync";
 const STATUSES: Status[] = ["draft", "stable", "deprecated"];
 const SHOWN_IN_PANELS = new Set(["title", "description", "tags", "sources", "status", "verified"]);
 type Mode = "rendered" | "raw";
+type Width = "narrow" | "wide";
+const WIDTHS: Width[] = ["narrow", "wide"];
+
+function initialWidth(): Width {
+  try {
+    const w = localStorage.getItem("okf-width");
+    return w === "wide" ? "wide" : "narrow";
+  } catch {
+    return "narrow";
+  }
+}
+
+// Small layout glyphs: one narrow column, one wide column.
+function WidthIcon({ w }: { w: Width }) {
+  const lines = w === "narrow" ? ["M9 7h6", "M9 11h6", "M9 15h6"] : ["M5 7h14", "M5 11h14", "M5 15h14"];
+  return (
+    <svg viewBox="0 0 24 22" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true">
+      {lines.map((d) => <path key={d} d={d} />)}
+    </svg>
+  );
+}
 
 function initialMode(): Mode {
   try {
@@ -112,6 +133,7 @@ export function NoteView({ notebook, id, sha }: { notebook: string; id: string; 
   const [busy, setBusy] = useState(false);
   const [msg, setMsg] = useState<{ warnings: string[] } | { error: string } | null>(null);
   const [mode, setMode] = useState<Mode>(initialMode);
+  const [width, setWidth] = useState<Width>(initialWidth);
   const [active, setActive] = useState<string | null>(null);
   const thr = useAsync(() => api.threads(notebook, id), [notebook, id]);
   const articleRef = useRef<HTMLElement>(null);
@@ -147,6 +169,15 @@ export function NoteView({ notebook, id, sha }: { notebook: string; id: string; 
     }
   };
 
+  const pickWidth = (w: Width) => {
+    setWidth(w);
+    try {
+      localStorage.setItem("okf-width", w);
+    } catch {
+      /* storage unavailable */
+    }
+  };
+
   const act = async (b: { status?: Status; verify?: boolean }) => {
     setBusy(true);
     setMsg(null);
@@ -174,7 +205,15 @@ export function NoteView({ notebook, id, sha }: { notebook: string; id: string; 
   const readOnly = note.data.notebook_status === "proposed";
 
   return (
-    <div className="doc">
+    <div className="doc" data-width={width}>
+      <div className="doc-center">
+      <div className="seg width-seg" role="group" aria-label={t.widthMode}>
+        {WIDTHS.map((w) => (
+          <button key={w} className={w === width ? "active" : ""} aria-pressed={w === width} aria-label={t[w]} title={t[w]} onClick={() => pickWidth(w)}>
+            <WidthIcon w={w} />
+          </button>
+        ))}
+      </div>
       <div className="doc-main">
         <p className="crumbs">
           <a href={notesHref(notebook, undefined)}>{notebook}</a> / <a href={notesHref(notebook, type)}>{type}</a>{" "}
@@ -221,6 +260,7 @@ export function NoteView({ notebook, id, sha }: { notebook: string; id: string; 
             ))}
           </ul>
         </section>
+      </div>
       </div>
       <aside className="rail">
         {mode === "rendered" && <Toc toc={toc} active={active} />}

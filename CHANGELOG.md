@@ -16,6 +16,9 @@ and the project uses [Semantic Versioning](https://semver.org/).
 - Presets `personal-finance` (accounts, debts, budget, goals, investments, reports, decisions) and `agent-retros`
   (agent sessions, patterns, environment improvements) in `presets/`, with documentation pages. / Пресеты
   `personal-finance` и `agent-retros` в `presets/` со страницами документации.
+- Review UI: a text width switcher (narrow / wide) in the top-right corner of a note on screens 1600px and wider; the
+  choice is remembered in the browser. / Review UI: переключатель ширины текста (узко / широко) в правом верхнем углу
+  заметки на экранах от 1600px; выбор запоминается в браузере.
 
 ### Changed / Изменено
 

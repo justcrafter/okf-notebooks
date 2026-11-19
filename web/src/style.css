@@ -192,6 +192,8 @@ h1 { margin-top: 12px; }
 /* document: centre column and the right rail */
 .doc { display: grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 48px; align-items: start; }
 .doc-main { min-width: 0; }
+.doc-center { min-width: 0; position: relative; }
+.width-seg { display: none; }
 .crumbs { margin: 4px 0 0; font-size: 12px; color: var(--muted); }
 .doc-head { display: flex; gap: 16px; align-items: flex-start; justify-content: space-between; }
 .doc-head h1 { margin-top: 6px; }
@@ -253,6 +255,11 @@ article :target, article h1, article h2, article h3 { scroll-margin-top: 64px; }
   .doc { grid-template-columns: minmax(0, 1fr) clamp(280px, 20vw, 420px); gap: 0; }
   .doc-main { width: 100%; max-width: 840px; margin: 0 auto; padding: 12px 40px 0; }
   .rail { top: 56px; max-height: calc(100vh - 56px); padding: 24px; border-left: 1px solid var(--line); }
+  /* width switcher in the top-right corner of the centre block; the text keeps 120px clear on each side */
+  .width-seg { display: inline-flex; position: absolute; top: 12px; right: 16px; z-index: 2; }
+  .width-seg button { height: 26px; width: 30px; padding: 0; display: inline-grid; place-items: center; }
+  .doc-main { max-width: min(840px, calc(100% - 240px)); }
+  .doc[data-width="wide"] .doc-main { max-width: min(80%, calc(100% - 240px)); }
 }
 
 /* mermaid */
